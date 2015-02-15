@@ -10,7 +10,7 @@
 -author("alfss").
 
 %% API
--export([cost/1, total/1, factorial/1]).
+-export([cost/1, total/1, factorial/1, uniq_id/0]).
 
 cost(oranges) -> 5;
 cost(newspaper) -> 8;
@@ -26,3 +26,11 @@ total([]) -> 0.
 
 factorial(0) -> 1;
 factorial(N) -> N * factorial(N-1).
+
+
+uniq_id() ->
+  {X,Y,Z} = now(),
+  Sum = X + Y + Z,
+  HashString = integer_to_list(Sum),
+  Res = crypto:hash(md5, HashString),
+  lists:flatten([io_lib:format("~2.16.0b", [C]) || <<C>> <= Res]).
