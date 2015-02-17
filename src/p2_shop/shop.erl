@@ -10,7 +10,7 @@
 -author("alfss").
 
 %% API
--export([cost/1, total/1, factorial/1, uniq_id/0]).
+-export([cost/1, total/1, factorial/1, uniq_id/0, sum/1, map/2]).
 
 cost(oranges) -> 5;
 cost(newspaper) -> 8;
@@ -23,6 +23,11 @@ cost(_) -> 0.
 total([{Product, Count}|T]) -> cost(Product) * Count + total(T);
 total([]) -> 0.
 
+sum([H|T]) -> H + sum(T);
+sum([]) -> 0.
+
+map(_, []) -> [];
+map(F, [H|T]) -> [F(H)|map(F, T)].
 
 factorial(0) -> 1;
 factorial(N) -> N * factorial(N-1).
